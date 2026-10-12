@@ -1,0 +1,203 @@
+.admin-sidebar {
+    width: 230px;
+    min-height: 100%;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    padding: 20px 14px;
+
+    background: #273249;
+
+    color: #ffffff;
+}
+
+
+/* Branding */
+
+.admin-sidebar-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 2px 8px 22px;
+}
+
+.admin-sidebar-logo {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #075bd3;
+
+    font-size: 16px;
+}
+
+.admin-sidebar-brand strong {
+    display: block;
+
+    font-size: 15px;
+}
+
+.admin-sidebar-brand span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #b9c1d1;
+
+    font-size: 9px;
+    letter-spacing: 0.04em;
+}
+
+
+/* Admin user */
+
+.admin-user {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 8px 22px;
+}
+
+.admin-user-avatar {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #1769df;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.admin-user-info strong {
+    display: block;
+
+    font-size: 12px;
+}
+
+.admin-user-info span {
+    display: block;
+
+    margin-top: 2px;
+
+    color: #aeb8ca;
+
+    font-size: 9px;
+}
+
+
+/* Navigation */
+
+.admin-sidebar-navigation {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.admin-nav-section-title {
+    margin: 14px 8px 5px;
+
+    color: #7f8ba1;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+.admin-nav-item {
+    min-height: 40px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    color: #c9d0dd;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.admin-nav-item span:first-child {
+    width: 18px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.admin-nav-item:hover {
+    background: rgba(255, 255, 255, 0.07);
+
+    color: #ffffff;
+}
+
+.admin-nav-item.active {
+    background: #075bd3;
+
+    color: #ffffff;
+}
+
+
+/* Logout */
+
+.admin-logout {
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 12px 12px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #c9d0dd;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.admin-logout:hover {
+    color: #ffffff;
+}

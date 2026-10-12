@@ -1,0 +1,386 @@
+.services-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #111827;
+}
+
+.services-container {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* ========================================
+   Breadcrumb
+======================================== */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 28px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.breadcrumb-current {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* ========================================
+   Page Header
+======================================== */
+
+.services-header {
+  padding: 42px 0 30px;
+}
+
+.services-header h1 {
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #111827;
+}
+
+.services-header p {
+  margin: 12px 0 0;
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* ========================================
+   Search / Filter / Sort
+======================================== */
+
+.services-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search */
+
+.search-box {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.search-icon {
+  font-size: 22px;
+  color: #6b7280;
+}
+
+.search-box input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #111827;
+}
+
+.search-box input::placeholder {
+  color: #9ca3af;
+}
+
+/* Category dropdown */
+
+.category-select {
+  height: 48px;
+  min-width: 180px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.category-select:focus {
+  border-color: #2563eb;
+}
+
+/* Sort dropdown */
+
+.sort-select {
+  height: 48px;
+  min-width: 180px;
+  padding: 0 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.sort-select:focus {
+  border-color: #2563eb;
+}
+
+/* ========================================
+   Service Count
+======================================== */
+
+.services-meta {
+  margin-top: 30px;
+}
+
+.services-meta p {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ========================================
+   Service Cards
+======================================== */
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.service-card {
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.service-image-wrapper {
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.service-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.service-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+/* ========================================
+   Service Card Content
+======================================== */
+
+.service-card-content {
+  padding: 20px;
+}
+
+.service-card h2 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.4;
+  color: #111827;
+}
+
+.service-description {
+  min-height: 44px;
+  margin: 10px 0 20px;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ========================================
+   Service Details
+======================================== */
+
+.service-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.service-details > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.service-label {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+.service-details strong {
+  font-size: 14px;
+  color: #111827;
+}
+
+/* ========================================
+   Book Button
+======================================== */
+
+.book-button {
+  width: 100%;
+  height: 44px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 7px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.book-button:hover {
+  background: #1d4ed8;
+}
+
+/* ========================================
+   Pagination
+======================================== */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding-top: 10px;
+  padding-bottom: 60px;
+}
+
+.pagination-pages {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination-button,
+.pagination-number {
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #374151;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination-button:hover:not(:disabled),
+.pagination-number:hover {
+  border-color: #2563eb;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination-number-active {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+.pagination-number-active:hover {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+}
+
+/* ========================================
+   Loading / Error / Empty States
+======================================== */
+
+.services-message {
+  padding: 60px 0;
+  text-align: center;
+  color: #6b7280;
+}
+
+.services-error {
+  color: #dc2626;
+}
+
+/* ========================================
+   Responsive - Tablet
+======================================== */
+
+@media (max-width: 900px) {
+  .service-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================================
+   Responsive - Mobile
+======================================== */
+
+@media (max-width: 640px) {
+  .services-container {
+    width: min(100% - 24px, 1200px);
+  }
+
+  .services-header {
+    padding-top: 30px;
+  }
+
+  .services-header h1 {
+    font-size: 28px;
+  }
+
+  .services-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .category-select,
+  .sort-select {
+    width: 100%;
+  }
+
+  .service-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pagination {
+    gap: 10px;
+  }
+
+  .pagination-pages {
+    gap: 5px;
+  }
+
+  .pagination-button,
+  .pagination-number {
+    min-width: 36px;
+    height: 38px;
+    padding: 0 9px;
+    font-size: 13px;
+  }
+}

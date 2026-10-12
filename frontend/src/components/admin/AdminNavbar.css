@@ -1,0 +1,74 @@
+.admin-navbar {
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 32px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #ececf2;
+}
+
+
+/* Brand */
+
+.admin-navbar-brand {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    min-width: 160px;
+
+    color: #182238;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.admin-logo {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #075bd3;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+
+
+/* Profile */
+
+.admin-navbar-profile {
+    margin-left: auto;
+}
+
+.admin-profile-circle {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #075bd3;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 700;
+}

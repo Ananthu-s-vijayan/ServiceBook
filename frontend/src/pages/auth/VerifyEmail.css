@@ -1,0 +1,300 @@
+/* =========================
+   Verify Email Page
+========================= */
+
+.verify-email-page {
+  min-height: 100vh;
+  background: #f5f7fb;
+}
+
+/* =========================
+   Header
+========================= */
+
+.verify-email-header {
+  height: 72px;
+  padding: 0 48px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.verify-email-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #111827;
+}
+
+.verify-email-brand-logo {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.verify-email-brand-name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* =========================
+   Main
+========================= */
+
+.verify-email-main {
+  min-height: calc(100vh - 72px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Verification Card
+========================= */
+
+.verify-email-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 36px 40px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+  text-align: center;
+}
+
+.verify-email-card-logo {
+  width: 36px;
+  height: 36px;
+  display: block;
+  margin: 0 auto 18px;
+}
+
+.verify-email-card h1 {
+  margin: 0;
+  color: #111827;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.verify-email-subtitle {
+  margin: 10px 0 30px;
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* =========================
+   Form
+========================= */
+
+.verify-email-form {
+  text-align: left;
+}
+
+.verify-email-form-group {
+  margin-bottom: 18px;
+}
+
+.verify-email-form-group label {
+  display: block;
+  margin-bottom: 7px;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.verify-email-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.verify-email-input-icon {
+  position: absolute;
+  left: 13px;
+  color: #9ca3af;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.verify-email-input-wrapper input {
+  width: 100%;
+  height: 46px;
+  box-sizing: border-box;
+  padding: 0 14px 0 40px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #111827;
+  font-size: 14px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.verify-email-input-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+.verify-email-input-wrapper input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Make the OTP easy to read */
+
+.verify-email-input-wrapper input.otp-input {
+  letter-spacing: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* =========================
+   Feedback Messages
+========================= */
+
+.verify-email-error {
+  margin: 4px 0 16px;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.verify-email-success {
+  margin: 4px 0 16px;
+  padding: 11px 12px;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  background: #f0fdf4;
+  color: #15803d;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+/* =========================
+   Verify Button
+========================= */
+
+.verify-email-button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 4px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.verify-email-button:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.verify-email-button:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.verify-email-button:disabled {
+  background: #93b4f5;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Resend OTP
+========================= */
+
+.verify-email-resend {
+  margin-top: 22px;
+  text-align: center;
+}
+
+.verify-email-resend-text {
+  margin: 0 0 8px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.verify-email-resend-button {
+  padding: 6px 10px;
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.verify-email-resend-button:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.verify-email-resend-button:disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Login Link
+========================= */
+
+.verify-email-login-text {
+  margin: 24px 0 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.verify-email-login-text a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.verify-email-login-text a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 600px) {
+  .verify-email-header {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .verify-email-brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .verify-email-brand-name {
+    font-size: 18px;
+  }
+
+  .verify-email-main {
+    min-height: calc(100vh - 64px);
+    padding: 30px 16px;
+  }
+
+  .verify-email-card {
+    padding: 30px 24px;
+  }
+
+  .verify-email-card h1 {
+    font-size: 24px;
+  }
+}
