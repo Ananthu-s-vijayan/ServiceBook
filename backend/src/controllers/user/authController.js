@@ -1,4 +1,4 @@
-const {registerUser, loginUser}=require("../../services/authService");
+const {registerUser, loginUser,googleLogin}=require("../../services/authService");
 
 const{verifyEmailOTP,sendVerificationOTP,sendPasswordResetOTP,resetPassword}=require("../../services/otpService");
 
@@ -39,6 +39,22 @@ const login = async(req,res)=>{
         });
     }
 }
+
+// Authenticates a user through Google and returns a ServiceBook JWT.
+const googleAuth = async (req, res, next) => {
+    try {
+        const result = await googleLogin(req.body);
+
+        return res.status(200).json({
+            success: true,
+            message: "Google login successful",
+            data: result
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 // Handles requests to verify a user's email using an OTP.
 const verifyEmail = async (req, res) => {
@@ -145,6 +161,7 @@ const resetPasswordController = async (req, res) => {
 module.exports={
     register,
     login,
+    googleAuth,
     verifyEmail,
     resendVerification,
     forgotPassword,

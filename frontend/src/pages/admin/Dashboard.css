@@ -1,0 +1,76 @@
+.admin-dashboard {
+    padding: 32px;
+    color: #172033;
+}
+
+.admin-dashboard-header {
+    margin-bottom: 28px;
+}
+
+.admin-dashboard-header h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.admin-dashboard-header p,
+.admin-dashboard-card p {
+    color: #697386;
+    line-height: 1.6;
+}
+
+.admin-dashboard-welcome {
+    padding: 28px;
+    margin-bottom: 32px;
+    border-radius: 12px;
+    background: #eaf1ff;
+    border: 1px solid #d6e3ff;
+}
+
+.admin-dashboard-welcome h2 {
+    margin: 0 0 10px;
+    font-size: 22px;
+}
+
+.admin-dashboard-welcome p {
+    margin: 0;
+    color: #4c5d7b;
+    line-height: 1.6;
+}
+
+.admin-dashboard-sections h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.admin-dashboard-card {
+    padding: 24px;
+    border: 1px solid #e6e9f0;
+    border-radius: 12px;
+    background: #ffffff;
+}
+
+.admin-dashboard-card h3 {
+    margin: 0 0 10px;
+    font-size: 17px;
+}
+
+.admin-dashboard-card p {
+    margin: 0;
+    font-size: 14px;
+}
+
+@media (max-width: 700px) {
+    .admin-dashboard {
+        padding: 20px;
+    }
+
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -95,7 +95,7 @@ describe("POST /api/user/login", () => {
             .send({
                 fullName: "Login Test User",
                 email: "logintest@example.com",
-                password: "password@123"
+                password: "Password@123"
             });
 
         expect(registerResponse.statusCode).toBe(201);
@@ -108,7 +108,7 @@ describe("POST /api/user/login", () => {
             .post("/api/user/login")
             .send({
                 email: "logintest@example.com",
-                password: "password@123"
+                password: "Password@123"
             });
 
         expect(response.statusCode).toBe(200);

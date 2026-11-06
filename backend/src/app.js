@@ -1,33 +1,36 @@
-const express =require("express");
-const path =require("path");
+const express = require("express");
+const path = require("path");
 
-const cors=require("cors");
+const cors = require("cors");
 
-const authRoutes=require("./routes/user/authRoutes");
+const authRoutes = require("./routes/user/authRoutes");
 
-const categoryRoutes=require("./routes/admin/categoryRoutes");
-const userCategoryRoutes=require("./routes/user/categoryRoutes");
+const categoryRoutes = require("./routes/admin/categoryRoutes");
+const userCategoryRoutes = require("./routes/user/categoryRoutes");
 
-const serviceRoutes=require("./routes/admin/serviceRoutes");
-const userServiceRoutes=require("./routes/user/serviceRoutes");
+const serviceRoute = require("./routes/admin/serviceRoutes");
+const userServiceRoutes = require("./routes/user/serviceRoutes");
 
-const availabilityRoutes=require("./routes/admin/availabilityRoutes");
+const bookingRoutes=require("./routes/user/bookingRoutes");
+
+const availabilityRoutes = require("./routes/admin/availabilityRoutes");
+const professionalRoutes = require("./routes/admin/professionalRoutes");
 const userAvailabilityRoutes = require("./routes/user/availabilityRoutes");
 
-const addressRoutes=require("./routes/user/addressRoutes");
+const addressRoutes = require("./routes/user/addressRoutes");
 
 
-const authMiddleware=require("./middleware/authMiddleware");
+const authMiddleware = require("./middleware/authMiddleware");
 
-const adminMiddleware=require("./middleware/adminMiddleware");
+const adminMiddleware = require("./middleware/adminMiddleware");
 
-
-
-
+const errorMiddleware  = require("./middleware/errorMiddleware");
 
 
 
-const app=express();
+
+
+const app = express();
 
 app.use(cors());
 
@@ -50,6 +53,7 @@ app.get("/api/health",(req,res)=>{
 
 app.use("/api/user",authRoutes);
 app.use("/api/user/addresses",authMiddleware,addressRoutes);
+app.use("/api/bookings",authMiddleware,bookingRoutes);
 
 app.use("/api/admin/categories",
     authMiddleware,
@@ -62,7 +66,7 @@ app.use("/api/categories",userCategoryRoutes);
 app.use("/api/admin/services",
     authMiddleware,
     adminMiddleware,
-    serviceRoutes);
+    serviceRoute);
 
 app.use("/api/services",userServiceRoutes);
 
@@ -71,8 +75,16 @@ app.use("/api/admin/availability",
     adminMiddleware,
     availabilityRoutes);
 
-app.use("/api/availability",userAvailabilityRoutes);   
+app.use("/api/admin/professionals",
+    authMiddleware,
+    adminMiddleware,
+    professionalRoutes
+)    
 
+app.use("/api/availability",userAvailabilityRoutes);
+
+//handle errors passed through next(error).
+app.use(errorMiddleware);
 
 
 module.exports=app;

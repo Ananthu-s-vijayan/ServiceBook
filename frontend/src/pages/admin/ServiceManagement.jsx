@@ -57,9 +57,16 @@ function ServiceManagement() {
                 setLoading(true);
                 setError("");
 
+                //Read the JWT saved after a successful login.
+                const token = localStorage.getItem("token");
+
                 const [servicesResponse, categoriesResponse] =
                     await Promise.all([
-                        fetch("http://localhost:3000/api/admin/services"),
+                        fetch("http://localhost:3000/api/admin/services",{
+                            headers:{
+                                Authorization: `Bearer ${token}`,
+                            }
+                        }),
                         fetch("http://localhost:3000/api/categories")
                     ]);
 
@@ -112,12 +119,15 @@ function ServiceManagement() {
 
 const handleToggleServiceStatus = async (service) => {
     try {
+        const token = localStorage.getItem("token");
+
         const response = await fetch(
             `http://localhost:3000/api/admin/services/${service._id}/status`,
             {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization:`Bearer ${token}`
                 },
                 body: JSON.stringify({
                     isActive: !service.isActive
@@ -213,12 +223,19 @@ const handleSaveCreate = async (event) => {
         setSavingCreate(true);
         setError("");
 
+        const token = localStorage.getItem("token");
+
+        if(!token){
+            throw new Error("Authentication token is missing. Please log in again.");
+        }
+
         const response = await fetch(
             "http://localhost:3000/api/admin/services",
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization:`Bearer ${token}`
                 },
                 body: JSON.stringify({
                     categoryId: createForm.categoryId,
@@ -282,9 +299,11 @@ const handleSaveCreate = async (event) => {
     }
 };
 
+
+
 const handleSaveEdit = async (event) => {
     event.preventDefault();
-
+    
     if (!editingService) {
         return;
     }
@@ -306,12 +325,20 @@ const handleSaveEdit = async (event) => {
         setSavingEdit(true);
         setError("");
 
+
+        const token = localStorage.getItem("token");
+
+        if(!token){
+            throw new Error("Authentication token is missing. Please log in again.");
+        }
+
         const response = await fetch(
             `http://localhost:3000/api/admin/services/${editingService._id}`,
             {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization:`Bearer ${token}`
                 },
                 body: JSON.stringify({
                     categoryId: editForm.categoryId,

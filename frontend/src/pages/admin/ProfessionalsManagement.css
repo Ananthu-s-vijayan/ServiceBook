@@ -1,0 +1,308 @@
+.admin-professionals-page {
+padding: 28px;
+color: #1f2937;
+}
+
+.professionals-page-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 24px;
+}
+
+.professionals-page-header h1 {
+margin: 0 0 8px;
+font-size: 28px;
+font-weight: 700;
+}
+
+.professionals-page-header p,
+.professionals-schedule-header p {
+margin: 0;
+color: #6b7280;
+line-height: 1.6;
+}
+
+.professionals-selection-panel,
+.professionals-schedule-panel {
+margin-bottom: 24px;
+padding: 24px;
+border: 1px solid #e5e7eb;
+border-radius: 12px;
+background: #ffffff;
+}
+
+.professionals-selection-panel {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 20px;
+}
+
+.professionals-field {
+display: flex;
+flex-direction: column;
+gap: 8px;
+min-width: 0;
+}
+
+.professionals-field label {
+color: #374151;
+font-size: 14px;
+font-weight: 600;
+}
+
+.professionals-field input,
+.professionals-field select,
+.professionals-selection-panel select {
+width: 100%;
+min-width: 0;
+min-height: 42px;
+padding: 10px 12px;
+border: 1px solid #d1d5db;
+border-radius: 7px;
+background: #ffffff;
+color: #111827;
+font: inherit;
+box-sizing: border-box;
+}
+
+.professionals-field input:focus,
+.professionals-field select:focus,
+.professionals-selection-panel select:focus {
+outline: 2px solid #bfdbfe;
+border-color: #2563eb;
+}
+
+.professionals-schedule-header {
+margin-bottom: 22px;
+}
+
+.professionals-schedule-header h2 {
+margin: 0 0 8px;
+font-size: 21px;
+}
+
+.professionals-schedule-list {
+display: flex;
+flex-direction: column;
+gap: 14px;
+}
+
+.professionals-day-card {
+padding: 18px;
+border: 1px solid #e5e7eb;
+border-radius: 10px;
+background: #f9fafb;
+}
+
+.professionals-day-card.is-working {
+border-color: #d1d5db;
+background: #ffffff;
+}
+
+.professionals-day-heading {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+}
+
+.professionals-day-toggle {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+font-weight: 700;
+}
+
+.professionals-day-toggle input {
+width: 17px;
+height: 17px;
+margin: 0;
+accent-color: #2563eb;
+}
+
+.professionals-day-status {
+padding: 5px 10px;
+border-radius: 20px;
+font-size: 12px;
+font-weight: 600;
+}
+
+.professionals-day-status.working {
+background: #dcfce7;
+color: #166534;
+}
+
+.professionals-day-status.not-working {
+background: #f3f4f6;
+color: #6b7280;
+}
+
+.professionals-hours-grid {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 16px;
+margin-top: 18px;
+}
+
+.professionals-breaks {
+margin-top: 20px;
+padding-top: 16px;
+border-top: 1px solid #e5e7eb;
+}
+
+.professionals-breaks-heading {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+}
+
+.professionals-text-button {
+padding: 7px 0;
+border: none;
+background: transparent;
+color: #2563eb;
+font: inherit;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+}
+
+.professionals-text-button:hover {
+color: #1d4ed8;
+}
+
+.professionals-no-breaks {
+margin: 12px 0 0;
+color: #6b7280;
+font-size: 13px;
+}
+
+.professionals-break-row {
+display: grid;
+grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+align-items: end;
+gap: 14px;
+margin-top: 14px;
+}
+
+.professionals-remove-break {
+min-height: 42px;
+padding: 8px 12px;
+border: 1px solid #fecaca;
+border-radius: 7px;
+background: #fff;
+color: #b91c1c;
+font: inherit;
+font-size: 13px;
+cursor: pointer;
+}
+
+.professionals-remove-break:hover {
+background: #fef2f2;
+}
+
+.professionals-form-actions {
+display: flex;
+justify-content: flex-end;
+margin-top: 24px;
+}
+
+.professionals-save-button {
+min-height: 44px;
+padding: 11px 20px;
+border: none;
+border-radius: 8px;
+background: #2563eb;
+color: #ffffff;
+font: inherit;
+font-weight: 600;
+cursor: pointer;
+}
+
+.professionals-save-button:hover:not(:disabled) {
+background: #1d4ed8;
+}
+
+.professionals-save-button:disabled {
+opacity: 0.65;
+cursor: not-allowed;
+}
+
+.professionals-message {
+margin: 0 0 20px;
+padding: 12px 14px;
+border-radius: 8px;
+font-size: 14px;
+}
+
+.professionals-error {
+border: 1px solid #fecaca;
+background: #fef2f2;
+color: #b91c1c;
+}
+
+.professionals-success {
+border: 1px solid #bbf7d0;
+background: #f0fdf4;
+color: #166534;
+}
+
+.professionals-empty-state {
+padding: 32px 20px;
+border: 1px dashed #d1d5db;
+border-radius: 12px;
+background: #ffffff;
+text-align: center;
+}
+
+.professionals-empty-state h2 {
+margin: 0 0 8px;
+font-size: 18px;
+}
+
+.professionals-empty-state p {
+margin: 0;
+color: #6b7280;
+line-height: 1.6;
+}
+
+@media (max-width: 700px) {
+.admin-professionals-page {
+padding: 16px;
+}
+
+
+.professionals-selection-panel {
+    grid-template-columns: 1fr;
+    padding: 18px;
+}
+
+.professionals-schedule-panel {
+    padding: 16px;
+}
+
+.professionals-hours-grid {
+    grid-template-columns: 1fr;
+}
+
+.professionals-break-row {
+    grid-template-columns: 1fr;
+}
+
+.professionals-day-card {
+    padding: 14px;
+}
+
+.professionals-form-actions {
+    justify-content: stretch;
+}
+
+.professionals-save-button {
+    width: 100%;
+}
+
+
+}

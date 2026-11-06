@@ -133,14 +133,14 @@ const requestsInLastHour = await VerificationToken.countDocuments({
             `,
         });
     } catch (error) {
-        // Invalidate the unsent OTP so it cannot be used.
-        await VerificationToken.updateOne(
-            { _id: verificationToken._id },
-            { $set: { invalidatedAt: new Date() } }
-        );
+    // Purpose: Remove an OTP that was never successfully delivered,
+    // so a failed email attempt does not trigger the resend cooldown.
+    await VerificationToken.deleteOne({
+        _id: verificationToken._id,
+    });
 
-        throw error;
-    }
+    throw error;
+}
 
     return {
         email: user.email,

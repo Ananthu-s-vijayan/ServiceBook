@@ -47,6 +47,8 @@ const getById=async(req,res)=>{
         });
     }
 }
+
+
 module.exports={
     getAll,
     getById

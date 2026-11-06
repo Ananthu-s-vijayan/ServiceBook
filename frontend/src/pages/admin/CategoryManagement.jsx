@@ -33,8 +33,15 @@ function CategoryManagement() {
                 setLoading(true);
                 setError("");
 
+                const token = localStorage.getItem("token");
+
                 const response = await fetch(
-                    "http://localhost:3000/api/admin/categories"
+                    "http://localhost:3000/api/admin/categories",
+                    {
+                        headers:{
+                            Authorization:`Bearer ${token}`,
+                        },
+                    }
                 );
 
                 if (!response.ok) {
@@ -100,10 +107,15 @@ function CategoryManagement() {
             );
         }
 
+        const token = localStorage.getItem("token");
+
         const response = await fetch(
             "http://localhost:3000/api/admin/categories",
             {
                 method: "POST",
+                headers:{
+                    Authorization:`Bearer ${token}`,
+                },
                 body: formData
             }
         );
@@ -177,10 +189,15 @@ const handleEditCategory = async (event) => {
             );
         }
 
+        const token = localStorage.getItem("token");
+
         const response = await fetch(
             `http://localhost:3000/api/admin/categories/${editingCategory._id}`,
             {
                 method: "PUT",
+                headers:{
+                    Authorization:`Bearer ${token}`,
+                },
                 body: formData
             }
         );
@@ -223,12 +240,16 @@ const handleEditCategory = async (event) => {
 
 const handleToggleCategoryStatus = async (category) => {
     try {
+
+        const token = localStorage.getItem("token");
+
         const response = await fetch(
             `http://localhost:3000/api/admin/categories/${category._id}/status`,
             {
                 method: "PATCH",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization:`Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     isActive: !category.isActive

@@ -7,9 +7,22 @@ const availabilitySlotSchema = new mongoose.Schema(
             ref: "Service",
             required: true
         },
+        professionalId:{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"Professional",
+            required:true
+        },
 
         date: {
             type: Date,
+            required: true
+        },
+
+        // Identifies whether this slot is hourly or for a full day.
+        slotType: {
+            type: String,
+            enum: ["hourly", "full_day"],
+            default: "hourly",
             required: true
         },
 

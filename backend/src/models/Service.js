@@ -39,9 +39,26 @@ const serviceSchema = new mongoose.Schema(
             trim: true
         },
 
+        // Determines whether the customer books hourly or for a full day.
+        durationType: {
+            type: String,
+            enum: ["hourly", "full_day"],
+            default: "hourly",
+            required: true
+        },
+
+        // Price charged per hour for hourly services.
         pricePerHour: {
             type: Number,
-            default: null
+            default: null,
+            min: 0
+        },
+
+        // Fixed price charged for a full-day service.
+        pricePerDay: {
+            type: Number,
+            default: null,
+            min: 0
         },
 
         estimatedDuration: {

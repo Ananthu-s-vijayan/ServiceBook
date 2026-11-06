@@ -1,0 +1,157 @@
+
+.available-slots {
+  margin-top: 24px;
+}
+
+.available-slots h2 {
+  margin-bottom: 16px;
+}
+
+.slot-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.slot-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 64px;
+  padding: 14px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #1f2937;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.slot-button:hover {
+  border-color: #2563eb;
+}
+
+.slot-button:focus-visible {
+  outline: 3px solid #93b4ff;
+  outline-offset: 2px;
+}
+
+.slot-button.selected {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.slot-selection-hint {
+  color: #647084;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.slot-button.selected .slot-selection-hint {
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.selected-slot-summary {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Service pricing summary */
+.booking-price-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+  padding: 18px;
+  border: 1px solid #dbe5fb;
+  border-radius: 10px;
+  background: #f8faff;
+}
+
+.booking-price-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.price-summary-label {
+  color: #647084;
+  font-size: 13px;
+}
+
+.booking-price-summary strong {
+  color: #172033;
+  overflow-wrap: anywhere;
+}
+
+.booking-price-summary .price-summary-total {
+  padding-top: 12px;
+  border-top: 1px solid #dbe5fb;
+}
+
+.booking-price-summary .price-summary-total strong {
+  color: #064ccf;
+  font-size: 20px;
+}
+
+.price-summary-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #647084;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* Navigation actions */
+.booking-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.booking-actions button {
+  cursor: pointer;
+}
+
+.booking-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 480px) {
+  .booking-price-summary {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .booking-actions {
+    flex-direction: column;
+  }
+
+  .booking-actions button {
+    width: 100%;
+  }
+
+  .slot-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+}
+

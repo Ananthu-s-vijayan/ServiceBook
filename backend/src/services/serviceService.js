@@ -1,7 +1,55 @@
 const Service = require("../models/Service");
 const Category = require("../models/Category");
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 
+// Validate pricing according to the service's booking type.
+const validateServicePricing = ({
+    durationType,
+    pricePerHour,
+    pricePerDay
+}) => {
+    if (!["hourly", "full_day"].includes(durationType)) {
+        const error = new Error(
+            "Duration type must be hourly or full_day"
+        );
+        error.statusCode = 400;
+        throw error;
+    }
+
+    if (durationType === "hourly") {
+        if (
+            pricePerHour === undefined ||
+            pricePerHour === null ||
+            pricePerHour === "" ||
+            !Number.isFinite(Number(pricePerHour)) ||
+            Number(pricePerHour) < 0
+        ) {
+            const error = new Error(
+                "A valid price per hour is required for hourly services"
+            );
+            error.statusCode = 400;
+            throw error;
+        }
+    }
+
+    if (durationType === "full_day") {
+        if (
+            pricePerDay === undefined ||
+            pricePerDay === null ||
+            pricePerDay === "" ||
+            !Number.isFinite(Number(pricePerDay)) ||
+            Number(pricePerDay) < 0
+        ) {
+            const error = new Error(
+                "A valid price per day is required for full-day services"
+            );
+            error.statusCode = 400;
+            throw error;
+        }
+    }
+};
+
+// Create a new service.
 const createService = async ({
     categoryId,
     title,
@@ -9,7 +57,9 @@ const createService = async ({
     shortDescription,
     description,
     pricingType,
+    durationType = "hourly",
     pricePerHour,
+    pricePerDay,
     estimatedDuration,
     imageUrl
 }) => {
@@ -17,7 +67,6 @@ const createService = async ({
         const error = new Error(
             "Category, title, SKU and pricing type are required"
         );
-
         error.statusCode = 400;
         throw error;
     }
@@ -26,26 +75,32 @@ const createService = async ({
 
     if (!category) {
         const error = new Error("Category not found");
-
         error.statusCode = 404;
         throw error;
     }
 
+    const normalizedSku = sku.trim();
+
     const existingService = await Service.findOne({
-        sku: sku.trim()
+        sku: normalizedSku
     });
 
     if (existingService) {
         const error = new Error("Service SKU already exists");
-
         error.statusCode = 409;
         throw error;
     }
 
+    validateServicePricing({
+        durationType,
+        pricePerHour,
+        pricePerDay
+    });
+
     return await Service.create({
         categoryId,
         title: title.trim(),
-        sku: sku.trim(),
+        sku: normalizedSku,
         shortDescription: shortDescription
             ? shortDescription.trim()
             : null,
@@ -53,9 +108,14 @@ const createService = async ({
             ? description.trim()
             : null,
         pricingType: pricingType.trim(),
+        durationType,
         pricePerHour:
-            pricePerHour !== undefined
-                ? pricePerHour
+            durationType === "hourly"
+                ? Number(pricePerHour)
+                : null,
+        pricePerDay:
+            durationType === "full_day"
+                ? Number(pricePerDay)
                 : null,
         estimatedDuration:
             estimatedDuration !== undefined
@@ -67,6 +127,7 @@ const createService = async ({
     });
 };
 
+// Update an existing service.
 const updateService = async (
     serviceId,
     {
@@ -76,16 +137,23 @@ const updateService = async (
         shortDescription,
         description,
         pricingType,
+        durationType,
         pricePerHour,
+        pricePerDay,
         estimatedDuration,
         imageUrl
     }
 ) => {
+    if (!mongoose.Types.ObjectId.isValid(serviceId)) {
+        const error = new Error("Invalid service ID");
+        error.statusCode = 400;
+        throw error;
+    }
+
     const service = await Service.findById(serviceId);
 
     if (!service) {
         const error = new Error("Service not found");
-
         error.statusCode = 404;
         throw error;
     }
@@ -95,7 +163,6 @@ const updateService = async (
 
         if (!category) {
             const error = new Error("Category not found");
-
             error.statusCode = 404;
             throw error;
         }
@@ -117,7 +184,6 @@ const updateService = async (
 
         if (existingService) {
             const error = new Error("Service SKU already exists");
-
             error.statusCode = 409;
             throw error;
         }
@@ -141,8 +207,17 @@ const updateService = async (
         service.pricingType = pricingType.trim();
     }
 
+    // Apply the new booking type before validating the final pricing.
+    if (durationType !== undefined) {
+        service.durationType = durationType;
+    }
+
     if (pricePerHour !== undefined) {
         service.pricePerHour = pricePerHour;
+    }
+
+    if (pricePerDay !== undefined) {
+        service.pricePerDay = pricePerDay;
     }
 
     if (estimatedDuration !== undefined) {
@@ -155,9 +230,23 @@ const updateService = async (
             : null;
     }
 
+    validateServicePricing({
+        durationType: service.durationType,
+        pricePerHour: service.pricePerHour,
+        pricePerDay: service.pricePerDay
+    });
+
+    // Keep only the price relevant to the selected booking type.
+    if (service.durationType === "hourly") {
+        service.pricePerDay = null;
+    } else {
+        service.pricePerHour = null;
+    }
+
     return await service.save();
 };
 
+// Activate or deactivate a service.
 const updateServiceStatus = async (
     serviceId,
     isActive
@@ -166,7 +255,6 @@ const updateServiceStatus = async (
         const error = new Error(
             "isActive must be a boolean"
         );
-
         error.statusCode = 400;
         throw error;
     }
@@ -175,14 +263,13 @@ const updateServiceStatus = async (
         serviceId,
         { isActive },
         {
-            returnDocument:"after",
+            returnDocument: "after",
             runValidators: true
         }
     );
 
     if (!service) {
         const error = new Error("Service not found");
-
         error.statusCode = 404;
         throw error;
     }
@@ -190,47 +277,62 @@ const updateServiceStatus = async (
     return service;
 };
 
+// Fetch active services that belong to active categories.
+const getActiveServices = async () => {
+    const activeCategories = await Category.find({
+        isActive: true
+    }).select("_id");
 
-const getActiveServices=async()=>{
+    const activeCategoryIds = activeCategories.map(
+        (category) => category._id
+    );
+
     return await Service.find({
-        isActive:true
+        isActive: true,
+        categoryId: { $in: activeCategoryIds }
     }).sort({
-        createdAt:-1
-    })
-}
+        createdAt: -1
+    });
+};
 
-const getActiveServiceById=async(serviceId)=>{
-
-
-      //Validate the MongoDB ObjectId before querying the database.
-     
-      //This prevents an invalid ID such as "abc" from causing
-      //a Mongoose CastError and becoming an incorrect 500 response.
-
-
-    if(!mongoose.Types.ObjectId.isValid(serviceId)){
-        const error=new Error("Invalid service ID");
-        error.statusCode=400;
+// Fetch one active service by ID from an active category.
+const getActiveServiceById = async (serviceId) => {
+    if (!mongoose.Types.ObjectId.isValid(serviceId)) {
+        const error = new Error("Invalid service ID");
+        error.statusCode = 400;
         throw error;
     }
-    const service= await Service.findOne({
+
+    const service = await Service.findOne({
         _id: serviceId,
-        isActive:true
+        isActive: true
     });
 
-    if(!service){
+    if (!service) {
         const error = new Error("Service not found");
-        error.statusCode=404;
+        error.statusCode = 404;
         throw error;
     }
-    return service;
-}
 
+    const category = await Category.findOne({
+        _id: service.categoryId,
+        isActive: true
+    });
+
+    if (!category) {
+        const error = new Error("Service not found");
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return service;
+};
+
+// Fetch all services for admin management.
 const getAllServices = async () => {
-    return await Service.find()
-        .sort({
-            createdAt: -1
-        });
+    return await Service.find().sort({
+        createdAt: -1
+    });
 };
 
 module.exports = {

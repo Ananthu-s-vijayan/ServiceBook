@@ -6,10 +6,12 @@ const app = require("../src/app");
 
 const Category = require("../src/models/Category");
 const Service = require("../src/models/Service");
+const Professional = require("../src/models/Professional");
 
 describe("Availability API", () => {
     let service;
     let adminToken;
+    let professional;
 
     beforeEach(async () => {
         // Create a valid admin JWT for testing protected admin endpoints.
@@ -43,10 +45,19 @@ describe("Availability API", () => {
             imageUrl: null,
             isActive: true
         });
+
+         // Create a professional assigned to the test service.
+        // Availability slots require a valid professional reference.
+         professional = await Professional.create({
+         name: "Test Professional",
+            serviceId: service._id,
+            isActive: true
+        });
     });
 
     afterEach(async () => {
         // Remove test data so each test starts with a clean state.
+        await Professional.deleteMany({});
         await Service.deleteMany({});
         await Category.deleteMany({});
     });
@@ -62,6 +73,7 @@ describe("Availability API", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send({
                 serviceId: service._id,
+                professionalId: professional._id,
                 date: "2026-10-10",
                 startTime: "08:00",
                 endTime: "09:00",
@@ -91,6 +103,7 @@ describe("Availability API", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send({
                 serviceId: service._id,
+                professionalId: professional._id,
                 date: "2026-10-10",
                 startTime: "08:00",
                 endTime: "09:00",
@@ -102,6 +115,7 @@ describe("Availability API", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send({
                 serviceId: service._id,
+                professionalId: professional._id,
                 date: "2026-10-10",
                 startTime: "09:00",
                 endTime: "10:00",
@@ -135,6 +149,7 @@ describe("Availability API", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send({
                 serviceId: service._id,
+                professionalId: professional._id,
                 date: "2026-10-10",
                 startTime: "08:00",
                 endTime: "09:00",
@@ -176,6 +191,7 @@ describe("Availability API", () => {
             .set("Authorization", `Bearer ${adminToken}`)
             .send({
                 serviceId: service._id,
+                professionalId: professional._id,
                 date: "2026-10-10",
                 startTime: "08:00",
                 endTime: "09:00",
@@ -240,7 +256,7 @@ describe("Availability API", () => {
         expect(response.statusCode).toBe(400);
         expect(response.body.success).toBe(false);
         expect(response.body.message).toBe(
-            "Service, date, start time, end time and capacity are required"
+            "Service,professional, date, start time, end time and capacity are required"
         );
     });
 });

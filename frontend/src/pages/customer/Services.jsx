@@ -154,18 +154,6 @@ const filteredServices = useMemo(() => {
   );
 
   /*
-   * Return to the first page whenever the search,
-   * category, or sorting option changes.
-   */
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [
-    searchTerm,
-    selectedCategory,
-    sortOption
-  ]);
-
-  /*
    * Loading state
    */
   if (loading) {
@@ -229,7 +217,9 @@ const filteredServices = useMemo(() => {
     placeholder="Search or select a service..."
     value={searchTerm}
     autoComplete="off"
-    onChange={(event) => setSearchTerm(event.target.value)}
+    onChange={(event) => {setSearchTerm(event.target.value);
+      setCurrentPage(1);
+    }}
   />
 
   {searchTerm.trim() && (
@@ -246,7 +236,9 @@ const filteredServices = useMemo(() => {
             type="button"
             key={service._id}
             className="search-suggestion-item"
-            onClick={() => setSearchTerm(service.title)}
+            onClick={() => {setSearchTerm(service.title);
+              setCurrentPage(1);
+            }}
           >
             {service.title}
           </button>
@@ -268,9 +260,10 @@ const filteredServices = useMemo(() => {
         <select
           className="category-select"
           value={selectedCategory}
-          onChange={(event) =>
-            setSelectedCategory(event.target.value)
-          }
+          onChange={(event) =>{
+            setSelectedCategory(event.target.value);
+            setCurrentPage(1);
+          }}
         >
           <option value="all">
             All Services
@@ -290,9 +283,10 @@ const filteredServices = useMemo(() => {
         <select
           className="sort-select"
           value={sortOption}
-          onChange={(event) =>
-            setSortOption(event.target.value)
-          }
+          onChange={(event) =>{
+            setSortOption(event.target.value);
+            setCurrentPage(1);
+          }}
         >
           <option value="default">
             Sort by

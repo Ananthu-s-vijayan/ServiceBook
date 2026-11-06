@@ -5,6 +5,8 @@ const{
     updateAvailabilitySlotStatus
 }=require("../../services/availabilityService");
 
+const User=require("../../models/User");
+
 const create=async(req,res)=>{
     try {
         const slot = await createAvailabilitySlot(req.body);
@@ -113,6 +115,8 @@ const updateStatus = async (req, res) => {
         });
     }
 };
+
+
 
 module.exports={
     create,getByService,update,updateStatus

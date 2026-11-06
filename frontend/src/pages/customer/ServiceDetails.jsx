@@ -152,12 +152,22 @@ function ServiceDetails() {
             <button
               type="button"
               className="service-details-book-button"
-              onClick={() => {
-                // Booking flow will be connected in the Address milestone.
-                console.log(
-                  "Book service:",
-                  service._id
-                );
+              onClick={()=>{
+                const token = localStorage.getItem("token");
+                const user =  localStorage.getItem("user");
+
+                const bookingPath = `/services/${service._id}/book/address`;
+
+                if(!token || !user){
+                  navigate("/login",{
+                    state:{
+                      from:bookingPath
+                    }
+                  });
+                  console.log("UPDATED ServiceDetails component loaded");
+                  return;
+                }
+                navigate(bookingPath);
               }}
             >
               Book Now
